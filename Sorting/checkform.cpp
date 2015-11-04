@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 
 	srand((unsigned int)time(NULL));
 	for(int i = 0; i < MAX; i++){
-		arrA[i] = (rand() % 10000) + 1;
+		arrA[i] = (rand() % 1000) + 1;
 		outFile << arrA[i] << " ";
 	}
 	outFile.close();
@@ -49,9 +49,8 @@ int main(int argc, char *argv[]){
 	t1 = clock();
 	QuickSort(copyArr, 0, MAX - 1);
 	t2 = clock();	
-	cout << "Quick Sort" << endl;
-	Stime_arr[0] = (t2-t1)/CLOCKS_PER_SEC;	
-	cout << "time : " << (double)(t2-t1)/CLOCKS_PER_SEC << endl;
+	Stime_arr[0] = (double)(t2-t1)/CLOCKS_PER_SEC;	
+	cout << "Quick Sort" << " - time : " << Stime_arr[0] << endl << endl;
 	printData(copyArr, MAX);
 
 	// Selection Sort
@@ -60,15 +59,44 @@ int main(int argc, char *argv[]){
 	t1 = clock();
 	SelectionSort(copyArr, MAX);
 	t2 = clock();	
-	cout << "Selection Sort" << endl;
-	Stime_arr[1] = (t2-t1)/CLOCKS_PER_SEC;
-	cout << "time : " << (double)(t2-t1)/CLOCKS_PER_SEC << endl;
+	Stime_arr[1] = (double)(t2-t1)/CLOCKS_PER_SEC;
+	cout << "Selection Sort" << " - time : " << Stime_arr[1] << endl << endl;
 	printData(copyArr, MAX);
-
 				
+	// Bubble Sort
+	for(int i = 0; i < MAX; i++)	// making copyArr.
+		copyArr[i] = inputArr[i];
+	t1 = clock();
+	BubbleSort(copyArr, MAX);
+	t2 = clock();	
+	Stime_arr[2] = (double)(t2-t1)/CLOCKS_PER_SEC;
+	cout << "Bubble Sort" << " - time : " << Stime_arr[2] << endl << endl;
+	printData(copyArr, MAX);
 	
+	// Insertion Sort
+	for(int i = 0; i < MAX; i++)	// making copyArr.
+		copyArr[i] = inputArr[i];
+	t1 = clock();
+	InsertionSort(copyArr, MAX);
+	t2 = clock();	
+	Stime_arr[3] = (double)(t2-t1)/CLOCKS_PER_SEC;
+	cout << "Insertion Sort" << " - time : " << Stime_arr[3] << endl << endl;
+	printData(copyArr, MAX);
+	
+	// Merge Sort
+	for(int i = 0; i < MAX; i++)	// making copyArr.
+		copyArr[i] = inputArr[i];
+	t1 = clock();
+	MergeSort(copyArr, MAX, 0, MAX-1);
+	t2 = clock();	
+	Stime_arr[4] = (double)(t2-t1)/CLOCKS_PER_SEC;
+	cout << "Merge Sort" << " - time : " << Stime_arr[4] << endl << endl;
+	printData(copyArr, MAX);
+	
+	// Heap sort
 	
 
+	cout << endl;
 
 	// reset IO
 	cin.rdbuf(cinbuf);
