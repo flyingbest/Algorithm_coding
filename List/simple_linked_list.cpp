@@ -93,7 +93,7 @@ void copyLinkedList(struct Node *node, struct Node **pNew){
 
 // compare two linked list
 // return value : same(1), different(0);
-int comparedLinkedList(struct Node *node1, struct Node *node2){
+int compareLinkedList(struct Node *node1, struct Node *node2){
 	static int flag;
 
 	// both lists are NULL
@@ -167,7 +167,7 @@ int main(){
 	
 	cout << "Comparing the two lists...\n";
 	cout << "Are the two lists same?\n";
-	if(comparedLinkedList(head, newHead))
+	if(compareLinkedList(head, newHead))
 		cout << "Yes, they are same!\n";
 	else
 		cout << "No, they are different!\n";
@@ -175,7 +175,20 @@ int main(){
 
 	numDel = 35;
 	ptrDelete = searchNode(newHead, numDel);
-	
-
-	
+	if(deleteNode(&newHead, ptrDelete)){
+		cout << "Node " << numDel << " deleted!\n";
+		cout << "The new list after the delete is \n";
+		display(newHead);
+	}
+	cout << "Comparing the two lists again...\n";
+	cout << "Are the two lists same?\n";
+	if(compareLinkedList(head, newHead))
+		cout << "Yes, they are same!\n";
+	else
+		cout << "No, they aer different!\n";
+	cout << endl;
+	cout << "Deletng the copied list\n";
+	deleteLinkedList(&newHead);
+	display(newHead);
 	return 0;
+}
