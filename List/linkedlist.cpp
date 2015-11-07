@@ -60,6 +60,23 @@ bool deleteNode(Node** head, Node* ptrDel){
 	return false;
 }
 
+Node reverse(Node** head){
+	Node* parent = *head;
+	Node* me = parent->next;
+	Node* chile = me->next;
+
+	parent->next = NULL;
+	while(child){
+		me->next = parent;
+		parent = me;
+		me = child;
+		child = child->next;
+	}
+	me->next = parent;
+	*head = me;
+	return *head;
+}
+
 
 
 
