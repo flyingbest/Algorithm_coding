@@ -4,7 +4,7 @@ using namespace std;
 typedef struct node{
 	int data;
 	struct node* next;
-}	Node;
+} Node;
 
 void initNode(Node* head, int n){
 	head->data = n;
@@ -36,34 +36,19 @@ void addFront(Node** head, int n){
 Node* searchNode(Node* head, int n){
 	Node* cur = head;
 	while(cur){
-		if(cur->data == n) return cur;
+		if(cur->data == n){
+			cout << "Found!!!\n";
+			return cur;
+		}
 		cur = cur->next;
 	}
-	cout << "no match\n";
-}
+	cout << "No match data in this list\n";
+}	
 
-
-Node* searchNode(Node* head, int n){
-	Node* cur = head;
-	while(cur){
-		if(cur->data == n)	return cur;
-		cur = cur->next;
-	}
-	cout << "No Node " << n << " in the list.\n";
-}
-
-bool deleteNode(Node**} head, Node* ptrDel){
+bool deleteNode(Node** head, Node* ptrDel){
 	Node* cur = *head;
 	if(ptrDel == *head){
-		*head = cur->next;
-		delete ptrDel;
-		return true;
-	while(cur){
-		if(cur->next == ptrDel){
-			cur->next = ptrDel->next;
-			
-	if(ptrDel == *head){
-		*head = cur->next;
+		ptrDel->next = *head;
 		delete ptrDel;
 		return true;
 	}
@@ -78,9 +63,7 @@ bool deleteNode(Node**} head, Node* ptrDel){
 	return false;
 }
 
-
-
-void display(Node* head){
+void print(Node* head){
 	Node* list = head;
 	while(list){
 		cout << list->data << " ";
@@ -93,19 +76,28 @@ int main(){
 	Node* head = new Node;
 	
 	initNode(head, 20);
-	display(head);
+	print(head);
 	addNode(head, 30);
-	display(head);
-	addNode(head, 40);
-	display(head);
+	print(head);
 	addFront(&head, 10);
-	display(head);
-	addFront(&head, 5);
-	display(head);
-	Node* ptrDel = searchNode(head, 7);
-	ptrDel = searchNode(head, 10);
-		
-	display(head);
+	print(head);
+	addNode(head, 40);
+	addNode(head, 50);
+	print(head);
+
+	cout << "==============================\n";
+	
+	Node* ptrDel = searchNode(head, 10);
+	cout << "found num : " << *ptrDel << endl;
+	print(head);
+
+	cout << "==============================\n";
+
+	int Delnum = 20;
+	ptrDel = searchNode(head, Delnum);
+	if(deleteNode(&head, ptrDel)){
+		cout << "< " << *ptrDel << " > delete complete!\n";
+	}
+
 	return 0;
 }
-
