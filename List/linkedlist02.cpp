@@ -88,7 +88,7 @@ int main(){
 	cout << "==============================\n";
 	
 	Node* ptrDel = searchNode(head, 10);
-	cout << "found num : " << *ptrDel << endl;
+	cout << "found num : " << ptrDel->data << endl;
 	print(head);
 
 	cout << "==============================\n";
@@ -96,8 +96,9 @@ int main(){
 	int Delnum = 20;
 	ptrDel = searchNode(head, Delnum);
 	if(deleteNode(&head, ptrDel)){
-		cout << "< " << *ptrDel << " > delete complete!\n";
+		cout << "delete complete!\n";
 	}
+	print(head);
 
 	return 0;
 }
