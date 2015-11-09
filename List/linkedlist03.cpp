@@ -72,6 +72,23 @@ bool deleteNode(Node** head, Node* ptrDel){
 	return false;
 }
 
+Node* reverse(Node** head){
+	Node *parent = *head;
+	Node *me = parent->next;
+	Node *child = me->next;
+
+	parent->next = NULL;
+	while(child){
+		me->next = parent;
+		parent = me;
+		me = child;
+		child = child->next;
+	}
+	me->next = parent;
+	*head = me;
+	return *head;
+}
+
 void copylinkedList(Node* node, Node** copynode){
 	if(node != NULL){
 		*copynode = new Node;
@@ -93,6 +110,15 @@ bool comparelinkedList(Node* node1, Node* node2){
 			comparelinkedList(node1->next, node2->next);
 	}
 	return true;
+}
+
+void deletelinkedList(Node** node){
+	Node* tmpNode;
+	while(*node){
+		tmpNode = *node;
+		*node = tmpNode->next;
+		delete tmpNode;
+	}
 }
 
 void deletelinkedList(Node** node){
