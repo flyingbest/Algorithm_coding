@@ -4,7 +4,16 @@ using namespace std;
 typedef struct node{
 	int data;
 	struct node* next;
-}	Node;
+} Node;
+
+void display(Node* head){
+	Node* list = head;
+	while(list){
+		cout << list->data << " ";
+		list = list->next;
+	}
+	cout << endl;
+}
 
 void initNode(Node* head, int n){
 	head->data = n;
@@ -25,7 +34,7 @@ void addNode(Node* head, int n){
 		cur = cur->next;
 	}
 }
-
+	
 void addFront(Node** head, int n){
 	Node* newNode = new Node;
 	newNode->data = n;
@@ -37,12 +46,12 @@ Node* searchNode(Node* head, int n){
 	Node* cur = head;
 	while(cur){
 		if(cur->data == n){
-			cout << "Found!!!\n";
+			cout << "Node < " << n << " > exist in this list.\n";
 			return cur;
 		}
 		cur = cur->next;
 	}
-	cout << "No Node " << n << " in the list.\n";
+	cout << "Node < " << n << " > not exist in this list.\n";
 }
 
 bool deleteNode(Node** head, Node* ptrDel){
@@ -61,6 +70,23 @@ bool deleteNode(Node** head, Node* ptrDel){
 		cur = cur->next;
 	}
 	return false;
+}
+
+Node* reverse(Node** head){
+	Node* parent = *head;
+	Node* me = parent->next;
+	Node* child = me->next;
+	
+	parent->next = NULL;
+	while(child){
+		me->next = parent;
+		parent = me;
+		me = child;
+		child = child->next;
+	}
+	me->next = parent;
+	*head = me;
+	return *head;
 }
 
 void copylinkedList(Node* node, Node** pNew){
@@ -94,15 +120,6 @@ void deletelinkedList(Node** node){
 		delete tmpNode;
 	}
 	cout << "nothing in here!\n";
-}
-
-void display(Node* head){
-	Node* list = head;
-	while(list){
-		cout << list->data << " ";
-		list = list->next;
-	}
-	cout << endl;
 }
 
 int main(){
