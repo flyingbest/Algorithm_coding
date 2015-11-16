@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 using namespace std;
 
 typedef struct node{
@@ -11,7 +10,7 @@ void printlist(Node* head){
 	Node* list = head;
 	while(list){
 		cout << list->data << " ";
-		list = list->data;
+		list = list->next;
 	}
 	cout << endl;
 }
@@ -29,7 +28,22 @@ void addNode(Node* head, int n){
 	Node* cur = head;
 	while(cur){
 		if(cur->next == NULL){
-			
+			cur->next = newNode;
+			return;
+		}
+		cur = cur->next;
+	}
+}
+
+void addFront(Node** head, int n){
+	Node* newNode = new Node;
+	newNode->data = n;
+	newNode->next = *head;
+	*head = newNode;
+}
+
+void deleteNode(Node* head, Node** ptrDel){
+	
 	
 
 
