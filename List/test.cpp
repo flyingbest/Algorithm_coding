@@ -43,6 +43,8 @@ void addFront(Node** head, int n){
 }
 
 void deleteNode(Node* head, Node** ptrDel){
+	Node* cur = head;
+	
 	
 	
 
