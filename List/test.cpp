@@ -42,8 +42,11 @@ void addFront(Node** head, int n){
 	*head = newNode;
 }
 
-void deleteNode(Node* head, Node** ptrDel){
+void deleteNode(Node** head, Node* ptrDel){
 	Node* cur = head;
+	if(cur->data == ptrDel){
+		cur->next == ptrDel->next;
+		
 	
 	
 	
