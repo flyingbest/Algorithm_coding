@@ -1,6 +1,19 @@
 #include <iostream>
 using namespace std;
 
+typedef struct element{
+	void* data;
+	struct element* next;
+} Element;
+
+bool push(Element** top, void* data){
+	Element* elem = new Element;
+	
+
+
+#include <iostream>
+using namespace std;
+
 typedef struct Element{
 	void *data;
 	struct Element *next;
