@@ -15,12 +15,13 @@ void destroyTree(Node* p_tree);
 */
 
 void printTree(Node* p_tree){
-	if(!p_tree){
-		cout << "empty!" << endl;
+	//cout << "check_point_2" << endl;
+	if(p_tree != NULL){
+		//cout << "check_point_3" << endl;
+		printTree(p_tree->p_left);
+		cout << p_tree->key_value << " ";
+		printTree(p_tree->p_right);	
 	}
-	printTree(p_tree->p_left);
-	cout << p_tree->key_value << " ";
-	printTree(p_tree->p_right);	
 }
 
 Node* insertNode(Node* p_tree, int key){
@@ -30,6 +31,7 @@ Node* insertNode(Node* p_tree, int key){
 		p_new_tree->p_left = NULL;
 		p_new_tree->p_right = NULL;
 		p_new_tree->key_value = key;
+		//cout << "check_point_1" << endl;
 		return p_new_tree;
 	}
 
@@ -50,15 +52,48 @@ Node* insertNode(Node* p_tree, int key){
 	return p_tree;
 }
 
-int main(){
-	Node* tmp;
-	Node* tree = new Node;
+Node* searchNode(Node* p_tree, int key){
+	// 빈 트리
+	if(p_tree == NULL){
+		return NULL;
+	}
+	// 키를 찾으면 임무 완수
+	else if(key == p_tree->key_value){
+		cout << "Found!" << endl;
+		return p_tree;
+	}
+	// 찾지 못했으면, 왼쪽 서브트리 또는 오른쪽 서브트리에서 확인
+	else if(key < p_tree->key_value){
+		return searchNode(p_tree->p_left, key);
+	}
+	else{
+		return searchNode(p_tree->p_right, key);
+	}
+}
 
-	tree = insertNode(tmp, 10);
-	//	tree = insertNode(tree, 20);
-	//	tree = insertNode(tree, 5);
+void destroyTree(Node* p_tree){
+	if(p_tree != NULL){
+		destroyTree(p_tree->p_left);
+		destroyTree(p_tree->p_right);
+		cout << "Deleting node: " << p_tree->key_value << endl;
+		delete p_tree;
+	}
+}
+
+int main(){
+	Node* tree;
+
+	tree = insertNode(NULL, 20);
+	tree = insertNode(tree, 30);
+	tree = insertNode(tree, 10);
+	tree = insertNode(tree, 40);
+	tree = insertNode(tree, 1);
 
 	printTree(tree);
+	
+	searchNode(tree, 40);
+
+	destroyTree(tree);
 	
 	return 0;
 }
