@@ -51,11 +51,12 @@ Node* insertNode(Node* p_tree, int key){
 }
 
 int main(){
+	Node* tmp;
 	Node* tree = new Node;
 
-	tree = insertNode(tree, 10);
-	tree = insertNode(tree, 20);
-	tree = insertNode(tree, 5);
+	tree = insertNode(tmp, 10);
+	//	tree = insertNode(tree, 20);
+	//	tree = insertNode(tree, 5);
 
 	printTree(tree);
 	
