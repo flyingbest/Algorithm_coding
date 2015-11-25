@@ -45,4 +45,10 @@ linked list, doubly linked list,
 
 ### Binary Tree (이진 트리)
 
+이진 트리의 종류에는 여러가지가 있다.
+
+정렬된 것이 BST(binary search tree).
+
+완전 이진 트리, 포화 이진 트리
+
 
