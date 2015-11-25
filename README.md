@@ -43,12 +43,24 @@ linked list, doubly linked list,
 
 ---
 
+### Tree (트리)
+
+어떤 그래프 G = (V, E)가 사이클을 가지지 않는 연결된 그래프라면, 이 그래프를 트리(tree)라고 한다.
+
+non-linear(비선형적) data structure(자료구조)
+
+사용되는 용어 : parent(부모), child(자식), sibling(형제), root(루트), leaf node(단말노드), height(높이), level(레벨), subtree(부분트리)
+
 ### Binary Tree (이진 트리)
 
-이진 트리의 종류에는 여러가지가 있다.
+_하나의 노드가 최대 두 개의 자식을 가질 수 있는 트리_
 
-정렬된 것이 BST(binary search tree).
+완전 이진 트리(complete binary tree), 포화 이진 트리(full binary tree)
 
-완전 이진 트리, 포화 이진 트리
+모든 포화 이진 트리는 완전 이진 트리이다.
+
+* 포함관계
+
+포화 이진 트리 < 완전 이진 트리 < 균형잡힌 이진트리
 
 
