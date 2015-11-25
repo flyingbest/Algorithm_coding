@@ -49,7 +49,7 @@ Node* removeNode(Node* tree, int delData){
 	Node* tmpNode;
 	
 	if(tree == NULL) cout << "해당노드를 찾을 수 없음.\n";
-	else if(tree->data >= delData) tree->left = removeNode(tree->left, delData);
+	else if(tree->data > delData) tree->left = removeNode(tree->left, delData);
 	else if(tree->data < delData) tree->right = removeNode(tree->right, delData);
 	else{
 		if(tree->left != NULL && tree->right != NULL){
