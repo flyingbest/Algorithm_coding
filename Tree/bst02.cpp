@@ -71,9 +71,9 @@ int findMax(BstNode* root){
 
 /*
 BstNode* deleteNode(BstNode* root, int deldata){
-	if(root == NULL) return root;
-	else if(deldata < root->data) root->left = deleteNode(root-left, deldata);
-	else if(deldata > root->data) root->right = deleteNode(root->right, deldata);
+	if(root == NULL){return root;}
+	else if(deldata < root->data){root->left = deleteNode(root-left, deldata);}
+	else if(deldata > root->data){root->right = deleteNode(root->right, deldata);}
 	else{
 		//case 1 : No child
 		if(root->left == NULL && root->right == NULL){
@@ -126,8 +126,6 @@ int main(){
 	
 	if(searchNode(root, num) == true) cout << "Found!\n";
 	else cout << "Not Found!\n";
-
-	printInorder(root);
 
 	int min;
 	cout << "let's find Min!\n";
