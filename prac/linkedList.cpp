@@ -1,31 +1,33 @@
-// not finished...
 #include <iostream>
 using namespace std;
 
 typedef struct node{
 	int data;
 	struct node* next;
-} Node;
+}	Node;
 
-void printlist(Node* head){
+void display(Node* head){
 	Node* list = head;
-	while(list){
+	if(list == NULL){
+		cout << "list is empty!" << endl;
+	}
+	while(list){ 
 		cout << list->data << " ";
 		list = list->next;
 	}
 	cout << endl;
 }
 
-void initNode(Node* head, int n){
-	head->data = n;
+void initNode(Node* head, int data){
+	head->data = data;
 	head->next = NULL;
 }
 
-void addNode(Node* head, int n){
+void addNode(Node* head, int data){
 	Node* newNode = new Node;
-	newNode->data = n;
+	newNode->data = data;
 	newNode->next = NULL;
-
+	
 	Node* cur = head;
 	while(cur){
 		if(cur->next == NULL){
@@ -36,34 +38,34 @@ void addNode(Node* head, int n){
 	}
 }
 
-void addFront(Node** head, int n){
+void addFront(Node** head, int data){
 	Node* newNode = new Node;
-	newNode->data = n;
+	newNode->data = data;
 	newNode->next = *head;
 	*head = newNode;
 }
 
-Node* searchNode(Node* head, int n){
+Node* searchNode(Node* head, int data){
 	Node* cur = head;
 	while(cur){
-		if(cur->data == n){
-			cout << "Find!!" << endl;
+		if(cur->data == data){
+			cout << "Found!" << endl;
 			return cur;
 		}
 		cur = cur->next;
 	}
-	cout << "NO such DATA in this list." << endl;
+	cout << "NOT Found!" << endl;
 }
-		
+
 bool deleteNode(Node** head, Node* ptrDel){
 	Node* cur = *head;
 	if(ptrDel == *head){
-		*head = cur->next;
+		*head = ptrDel->next;
 		delete ptrDel;
 		return true;
 	}
 	while(cur){
-		if(cur->next = ptrDel){
+		if(cur->next == ptrDel){
 			cur->next = ptrDel->next;
 			delete ptrDel;
 			return true;
@@ -76,25 +78,28 @@ bool deleteNode(Node** head, Node* ptrDel){
 int main(){
 	Node* head = new Node;
 	
-	initNode(head, 10);	printlist(head);
-	addNode(head, 20); printlist(head);
-	addFront(&head, 5);	printlist(head);
-	addNode(head, 30); printlist(head);
-	addFront(&head, 1);	printlist(head);
+	initNode(head, 20);	display(head);
+	addFront(&head, 10); addNode(head, 30); addNode(head, 40); addNode(head, 50);
+	display(head);
 
-	int Del = 25;
-	Node* ptrDel = searchNode(head, Del);	// NOT exist data.
-	ptrDel = searchNode(head, 20);	// exist data.
+	int num;
 
-	printlist(head);
+	//	while(true){
 
+	cout << "Enter the number that you deleted : ";
+	cin >> num;
+	
+	Node* ptrDel = searchNode(head, num);
+	
 	if(deleteNode(&head, ptrDel))
-		cout << "delete complete!!!" << endl;
+		cout << "delete completed!" << endl;
 	else
-		cout << "delete failed!!!" << endl;
+		cout << "delete failed!" << endl;
 
-	printlist(head);
+	display(head);
+
+	//	}
+ 
 
 	return 0;
 }
-
