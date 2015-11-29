@@ -1,33 +1,33 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 typedef struct node{
-	int data;
+	int id;
+	string name;
 	struct node* next;
-}	Node;
+} Node;
 
 void display(Node* head){
-	Node* list = head;
-	if(list == NULL){
-		cout << "list is empty!" << endl;
+	Node* cur = head;
+	while(cur){
+		cout << "id : " << cur->id << ", name : " << cur->name << endl;
+		cur = cur->next;
 	}
-	while(list){ 
-		cout << list->data << " ";
-		list = list->next;
-	}
-	cout << endl;
 }
 
-void initNode(Node* head, int data){
-	head->data = data;
+void initNode(Node* head, int _id, string _name){
+	head->id = _id;
+	head->name = _name;
 	head->next = NULL;
 }
 
-void addNode(Node* head, int data){
+void addNode(Node* head, int _id, string _name){
 	Node* newNode = new Node;
-	newNode->data = data;
+	newNode->id = _id;
+	newNode->name = _name;
 	newNode->next = NULL;
-	
+
 	Node* cur = head;
 	while(cur){
 		if(cur->next == NULL){
@@ -38,29 +38,42 @@ void addNode(Node* head, int data){
 	}
 }
 
-void addFront(Node** head, int data){
+void addFront(Node** head, int _id, string _name){
 	Node* newNode = new Node;
-	newNode->data = data;
+	newNode->id = _id;
+	newNode->name = _name;
 	newNode->next = *head;
 	*head = newNode;
 }
 
-Node* searchNode(Node* head, int data){
+Node* searchNode_id(Node* head, int _id){
 	Node* cur = head;
 	while(cur){
-		if(cur->data == data){
-			cout << "Found!" << endl;
+		if(cur->id == _id){
+			cout << "Found this ( " << _id << " ) id in this list." << endl;
 			return cur;
 		}
 		cur = cur->next;
 	}
-	cout << "NOT Found!" << endl;
+	cout << "CAN'T Find this ( " << _id << " ) id in this list." << endl;
+}
+
+Node* searchNode_name(Node* head, string _name){
+	Node* cur = head;
+	while(cur){
+		if(cur->name == _name){
+			cout << "Found this ( " << _name << " ) name in this list." << endl;
+			return cur;
+		}
+		cur = cur->next;
+	}
+	cout << "CAN'T Find this ( " << _name << " ) name is this list." << endl;
 }
 
 bool deleteNode(Node** head, Node* ptrDel){
 	Node* cur = *head;
 	if(ptrDel == *head){
-		*head = ptrDel->next;
+		*head = cur->next;
 		delete ptrDel;
 		return true;
 	}
@@ -78,28 +91,47 @@ bool deleteNode(Node** head, Node* ptrDel){
 int main(){
 	Node* head = new Node;
 	
-	initNode(head, 20);	display(head);
-	addFront(&head, 10); addNode(head, 30); addNode(head, 40); addNode(head, 50);
+	initNode(head, 10, "ansxodbs");	addNode(head, 20, "gil-dong");
+	addFront(&head, 1, "rlawltn"); addNode(head, 30, "iron-man");
+	addNode(head, 40, "jarvis"); addNode(head, 50, "ultron");
+	cout << "linked list >> " << endl;
 	display(head);
 
-	int num;
-
-	//	while(true){
-
-	cout << "Enter the number that you deleted : ";
-	cin >> num;
+	cout << "=========================================================\n";
 	
-	Node* ptrDel = searchNode(head, num);
+	Node* ptrDel = searchNode_id(head, 10);
+	ptrDel = searchNode_name(head, "ansxodbs");
+	ptrDel = searchNode_id(head, 15);
+	ptrDel = searchNode_name(head, "nobody");
+
+	cout << "linked list >> " << endl;
+	display(head);
+
+	cout << "=========================================================\n";
+
+	int id;
+	cout << "Enter the id that you deleted : ";
+	cin >> id;
 	
+	ptrDel = searchNode_id(head, id);
 	if(deleteNode(&head, ptrDel))
 		cout << "delete completed!" << endl;
 	else
 		cout << "delete failed!" << endl;
 
+	string name;
+	cout << "Enter the name that you deleted : ";
+	cin >> name;
+	
+	ptrDel = searchNode_name(head, name);
+	if(deleteNode(&head, ptrDel))
+		cout << "delete completed!" << endl;
+	else
+		cout << "delete failed!" << endl;
+	
+	cout << "=========================================================\n";
+	cout << "linked list >> " << endl;
 	display(head);
-
-	//	}
- 
 
 	return 0;
 }
