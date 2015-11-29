@@ -70,7 +70,9 @@ int findMax(BstNode* root){
 }
 
 BstNode* deleteNode(BstNode* root, int del){
-	if(root == NULL){ return root; }
+	if(root == NULL){
+		return root;
+	}
 	else if(del < root->data){
 		root->left = deleteNode(root->left, del);
 	}
@@ -93,17 +95,14 @@ BstNode* deleteNode(BstNode* root, int del){
 			delete tmp;
 		}
 		else{
-			cout << "check point 01" << endl;
-			int datadel = findMin(root->right);
-			BstNode* tmp;
-			tmp->data = datadel; 
-			root->data = tmp->data;
-			root->right = deleteNode(root->right, tmp->data);
+			int Delnum = findMin(root->right);
+			root->data = Delnum;
+			root->right = deleteNode(root->right, Delnum);
 		}
-	return root;
+	//return root;	// 위치 수정!!!
 	}
+	return root;
 }		
-
 
 /*
 BstNode* deleteNode(BstNode* root, int deldata){
@@ -145,50 +144,76 @@ void printInorder(BstNode* root){
 		cout << root->data << " ";
 		printInorder(root->right);
 	}
-	cout << endl;
+}
+
+void printPreorder(BstNode* root){
+	if(root != NULL){
+		cout << root->data << " ";
+		printPreorder(root->left);
+		printPreorder(root->right);
+	}
+}
+
+void printPostorder(BstNode* root){
+	if(root != NULL){
+		printPostorder(root->left);
+		printPostorder(root->right);
+		cout << root->data << " ";
+	}
 }
 
 int main(){
 	cout << "Program START >>" << endl;
 	cout << "===============================================================" << endl;
 	
-	cout << "creating tree >>" << endl;
+	cout << "creating tree >>   ";
 	BstNode* root = NULL;	// creating an empty tree
 	root = insertNode(root, 20);	root = insertNode(root, 30);
 	root = insertNode(root, 25);	root = insertNode(root, 10);
 	root = insertNode(root, 15); 	root = insertNode(root, 5);	root = insertNode(root, 35);
+	printInorder(root); cout << endl;
 	
-	printInorder(root);
+	cout << "===============================================================" << endl;
+	int searchnum;
+	cout << "Enter number be searched(any num) : ";
+	cin >> searchnum;
+	if(searchNode(root, searchnum) == true) cout << "Found! The searchnum " << searchnum << " is exist\n";
+	else cout << "Not Found! The searchnum " << searchnum << " is NOT exist\n";
 
-	
-	int num;
-	cout << "Enter number be searched\n";
-	cin >> num;
-	
-	if(searchNode(root, num) == true) cout << "Found!\n";
-	else cout << "Not Found!\n";
-
+	cout << "===============================================================" << endl;
 	int min;
 	cout << "let's find Min!\n";
 	min = findMin(root);
 	cout << "min : " << min << endl;
+	cout << "tree >>   ";
+	printInorder(root); cout << endl;
 	
+	cout << "===============================================================" << endl;
 	int max;
 	cout << "let's find Max!\n";
 	max = findMax(root);
 	cout << "max : " << max << endl;
+	cout << "tree >>   ";
+	printInorder(root); cout << endl;
 
-	printInorder(root);	
-	
+	cout << "===============================================================" << endl;
 	int delnum;
-	cout << "Enter the delete Num : ";
+	cout << "Enter the delete Num(20) : ";
 	cin >> delnum;
+	/*
+	BstNode* tmp = deleteNode(root, delnum);
+	printInorder(tmp); cout << endl;
+	*/
+	root = deleteNode(root, delnum);
+	printInorder(root); cout << endl;
+	
+	cout << "===============================================================" << endl;
+	cout << "Printing Test" << endl;
+	cout << "PreOrder(25, 10, 5, 15, 30, 35) >>   ";
+	printPreorder(root); cout << endl;	
+	cout << "PostOrder(5, 15, 10, 35, 30, 25) >>   ";
+	printPostorder(root); cout << endl;
 
-	BstNode* delptr;
-	delptr = deleteNode(root, delnum);
-	
-	printInorder(delptr);
-	
 	return 0;
 }
 
