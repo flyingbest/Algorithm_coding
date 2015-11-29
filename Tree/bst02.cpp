@@ -69,6 +69,41 @@ int findMax(BstNode* root){
 	return findMax(root->right);
 }
 
+BstNode* deleteNode(BstNode* root, int del){
+	if(root == NULL){ return root; }
+	else if(del < root->data){
+		root->left = deleteNode(root->left, del);
+	}
+	else if(del > root->data){
+		root->right = deleteNode(root->right, del);
+	}
+	else{
+		if(root->left == NULL && root->right == NULL){
+			delete root;
+			root = NULL;
+		}
+		else if(root->left == NULL){
+			BstNode* tmp = root;
+			root = root->right;
+			delete tmp;
+		}
+		else if(root->right == NULL){
+			BstNode* tmp = root;
+			root = root->left;
+			delete tmp;
+		}
+		else{
+			int datadel = findMin(root->right);
+			BstNode* tmp;
+			tmp->data = datadel; 
+			root->data = tmp->data;
+			root->right = deleteNode(root->right, tmp->data);
+		}
+	return root;
+	}
+}		
+
+
 /*
 BstNode* deleteNode(BstNode* root, int deldata){
 	if(root == NULL){return root;}
@@ -138,6 +173,15 @@ int main(){
 	cout << "max : " << max << endl;
 
 	printInorder(root);	
+	
+	int delnum;
+	cout << "Enter the delete Num : ";
+	cin >> delnum;
+
+	BstNode* delptr;
+	delptr = deleteNode(root, delnum);
+	
+	printInorder(delptr);
 	
 	return 0;
 }
