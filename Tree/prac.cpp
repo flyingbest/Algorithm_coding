@@ -47,6 +47,8 @@ bool searchNode(bstnode* root, int data){
 int main(){
 	bstnode* root = NULL;
 	root = insertNode(root, 10);
+	root = insertNode(root, 20);
+	root = insertNode(root, 30);
 	
 	printInorder(root);
 	
